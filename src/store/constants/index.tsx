@@ -1,0 +1,19 @@
+
+export const MACHINE_ADD : string = 'MACHINE_ADD';
+
+export const UPDATE_MACHINE_TYPES_FIELD_VALUE : string = 'UPDATE_MACHINE_TYPES_FIELD_VALUE';
+export const DELETE_MACHINE : string = 'DELETE_MACHINE';
+
+export const ADD_MACHINE : string = 'ADD_MACHINE';
+
+export const UPDATE_MACHINE_TYPES_FIELD : string = 'UPDATE_MACHINE_TYPES_FIELD';
+export const DELETE_MACHINE_TYPES_FIELD : string = 'DELETE_MACHINE_TYPES_FIELD';
+export const ADD_MACHINE_TYPES_FIELD : string = 'ADD_MACHINE_TYPES_FIELD';
+
+export const DELETE_MACHINE_TYPE : string = 'DELETE_MACHINE_TYPE';
+export const ADD_MACHINE_TYPE : string = 'ADD_MACHINE_TYPE';
+
+export const UPDATE_MACHINE_TYPE : string = 'UPDATE_MACHINE_TYPE';
+
+
+
