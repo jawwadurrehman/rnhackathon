@@ -39,7 +39,7 @@ const MachineTypeListing = ({
 
         if (field) {
           const fieldValue = machine_types_fields_value.find(
-            (val: any) => val.machine_type_field_id === field.id,
+            (val: any) => val.machine_type_field_id === field.id && val.machine_id === machine.id,
           );
           if (fieldValue) {
             return fieldValue.value;
