@@ -19,8 +19,9 @@ const MachineTypeListing = ({
 
   const [datePicker, setdatePicker] = useState({
     visible: false,
-    field_id: 0,
-    machine_type_field_id: 0,
+    field_id: -1,
+    machine_type_field_id: -1,
+    machine_id: -1,
   });
 
   const getFieldValue = (machine_id: string, machine_type_field_id: string) =>
@@ -39,7 +40,9 @@ const MachineTypeListing = ({
 
         if (field) {
           const fieldValue = machine_types_fields_value.find(
-            (val: any) => val.machine_type_field_id === field.id && val.machine_id === machine.id,
+            (val: any) =>
+              val.machine_type_field_id === field.id &&
+              val.machine_id === machine.id,
           );
           if (fieldValue) {
             return fieldValue.value;
@@ -84,7 +87,7 @@ const MachineTypeListing = ({
           <DatePicker
             modal
             mode="date"
-            open={datePicker?.visible}
+            open={datePicker?.visible && datePicker.machine_id == machine.id}
             date={new Date()}
             onConfirm={date => {
               dispatch({
@@ -94,7 +97,7 @@ const MachineTypeListing = ({
                   value:
                     date.getFullYear() +
                     '-' +
-                    date.getMonth().toString().padStart(2, '0') +
+                    (date.getMonth() + 1).toString().padStart(2, '0') +
                     '-' +
                     date.getDay().toString().padStart(2, '0'),
                   property: 'value',
@@ -159,6 +162,7 @@ const MachineTypeListing = ({
                           visible: true,
                           field_id: field?.id,
                           machine_type_field_id: machine_type_field.id,
+                          machine_id: machine.id,
                         }))
                       }
                       style={{width: '100%'}}

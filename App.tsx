@@ -23,13 +23,19 @@ const App = (props: any) => {
       <Drawer.Navigator initialRouteName="Dashboard">
         <Drawer.Screen name="Dashboard" component={Dashboard} />
 
-        {machine_types.map((machine_type: any, index: number) => (
-          <Drawer.Screen
-            key={index}
-            name={machine_type.name === '' ? 'Unnamed' : machine_type.name}
-            children={() => <MachineTypesMenu machine_type={machine_type} />}
-          />
-        ))}
+        {machine_types.map((machine_type: any, index: number) => {
+          
+          return (
+            <Drawer.Screen
+              key={index}
+              name={'machine-' + machine_type.id}
+              options={{
+                title:machine_type.name
+              }}
+              children={() => <MachineTypesMenu machine_type={machine_type} />}
+            />
+          );
+        })}
         <Drawer.Screen name="Manage Categories" component={ManageCategories} />
       </Drawer.Navigator>
     </NavigationContainer>
@@ -47,37 +53,36 @@ const MachineTypesMenu = ({machine_type}: any) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{paddingBottom: 100}}>
-      <View
-            style={[
-              styles.row,
-              styles.spaceBetween,
-              {
-                paddingVertical: 10,
-                marginBottom: 5,
-                borderBottomWidth: 1,
-                borderColor: colors.black + '10',
-              },
-            ]}>
-            <Text 
-              style={{fontWeight: '700', color: colors.black}}
-              variant="headlineSmall">
-              {machine_type.name}
-            </Text>
-            <Button
-              icon="plus"
-              mode="contained"
-              
-              onPress={() =>
-                dispatch({
-                  type: ADD_MACHINE,
-                  payload: {
-                    machine_type_id: machine_type.id,
-                  },
-                })
-              }>
-              ADD
-            </Button>
-          </View>
+        <View
+          style={[
+            styles.row,
+            styles.spaceBetween,
+            {
+              paddingVertical: 10,
+              marginBottom: 5,
+              borderBottomWidth: 1,
+              borderColor: colors.black + '10',
+            },
+          ]}>
+          <Text
+            style={{fontWeight: '700', color: colors.black}}
+            variant="headlineSmall">
+            {machine_type.name}
+          </Text>
+          <Button
+            icon="plus"
+            mode="contained"
+            onPress={() =>
+              dispatch({
+                type: ADD_MACHINE,
+                payload: {
+                  machine_type_id: machine_type.id,
+                },
+              })
+            }>
+            ADD
+          </Button>
+        </View>
 
         <MachineTypeListing
           title_id={machine_type.title_id}

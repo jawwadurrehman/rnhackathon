@@ -5,7 +5,6 @@ import {
   DELETE_MACHINE,
   DELETE_MACHINE_TYPE,
   DELETE_MACHINE_TYPES_FIELD,
-  MACHINE_ADD,
   UPDATE_MACHINE_TYPE,
   UPDATE_MACHINE_TYPES_FIELD,
   UPDATE_MACHINE_TYPES_FIELD_VALUE,
@@ -59,8 +58,6 @@ const machinesReducer = (
   },
 ) => {
   switch (action.type) {
-    case MACHINE_ADD:
-      return {...state, machines: [...state.machines, action.payload]};
 
     case UPDATE_MACHINE_TYPES_FIELD_VALUE: {
       const newArray = [...state.machine_types_fields_value];
@@ -88,8 +85,9 @@ const machinesReducer = (
       const index = newArray.findIndex(
         (val: any) => val.id === action.payload.id,
       );
-
-      newArray.splice(index, 1);
+     
+      
+     newArray.splice(index, 1);
 
       return {
         ...state,
@@ -112,7 +110,7 @@ const machinesReducer = (
     case UPDATE_MACHINE_TYPES_FIELD: {
       const newArray = [...state.machine_types_fields];
       const index = newArray.findIndex(
-        (val: any) => val.id === action.payload.id,
+        (val:any) => val.id === action.payload.id,
       );
 
       newArray[index][action.payload.property] = action.payload.value;

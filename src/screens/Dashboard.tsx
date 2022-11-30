@@ -2,11 +2,9 @@ import {View, SafeAreaView, ScrollView} from 'react-native';
 import React, {useEffect} from 'react';
 import styles, {colors} from '../styles';
 import {useSelector, useDispatch} from 'react-redux';
-import {Text, Button, TextInput} from 'react-native-paper';
+import {Text, Button} from 'react-native-paper';
 import {
   ADD_MACHINE,
-  DELETE_MACHINE,
-  UPDATE_MACHINE_TYPES_FIELD_VALUE,
 } from '../store/constants';
 import MachineTypeListing from '../components/MachineTypeListing';
 
