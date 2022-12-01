@@ -17,7 +17,7 @@ const theme = {
     ...DefaultTheme.colors,
     primary: colors.primary,
   },
-  
+
   dark: false,
   roundness: 1,
 };

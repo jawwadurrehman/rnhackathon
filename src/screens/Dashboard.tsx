@@ -1,74 +1,22 @@
-import {View, SafeAreaView, ScrollView} from 'react-native';
-import React, {useEffect} from 'react';
-import styles, {colors} from '../styles';
-import {useSelector, useDispatch} from 'react-redux';
-import {Text, Button} from 'react-native-paper';
-import {
-  ADD_MACHINE,
-} from '../store/constants';
-import MachineTypeListing from '../components/MachineTypeListing';
+import React from 'react';
+import {useSelector} from 'react-redux';
+
+import {MachinesType} from '../store/types';
+import {RootState} from '../../App';
+import Container from '../components/Container';
+import MachineTypesMenu from '../components/MachineTypesMenu';
 
 const Dashboard = () => {
-  const {
-    machine_types,
-    machines,
-    machine_types_fields,
-    machine_types_fields_value,
-  } = useSelector((state: any) => state.machinesReducer);
-
-  const dispatch = useDispatch();
+  const {machine_types} = useSelector(
+    (state: RootState) => state.machinesReducer,
+  );
 
   return (
-    <SafeAreaView style={styles.container}>
-         <ScrollView contentContainerStyle={{paddingBottom:100}}>
-      {machine_types.map((machine_type: any, index: number) => (
-        <View style={{marginBottom: 10}} key={'machine-type' + index}>
-          <View
-            style={[
-              styles.row,
-              styles.spaceBetween,
-              {
-                paddingVertical: 10,
-                marginBottom: 5,
-                borderBottomWidth: 1,
-                borderColor: colors.black + '10',
-              },
-            ]}>
-            <Text 
-              style={{fontWeight: '700', color: colors.black}}
-              variant="headlineSmall">
-              {machine_type.name}
-            </Text>
-            <Button
-              icon="plus"
-              mode="contained"
-              
-              onPress={() =>
-                dispatch({
-                  type: ADD_MACHINE,
-                  payload: {
-                    machine_type_id: machine_type.id,
-                  },
-                })
-              }>
-              ADD
-            </Button>
-          </View>
-
-          <MachineTypeListing
-            title_id={machine_type.title_id}
-            machines={machines.filter(
-              (e: any) => e.machine_type_id === machine_type.id,
-            )}
-            machine_types_fields={machine_types_fields.filter(
-              (e: any) => e.machine_type_id === machine_type.id,
-            )}
-            machine_types_fields_value={machine_types_fields_value}
-          />
-        </View>
+    <Container>
+      {machine_types.map((machine_type: MachinesType, index: number) => (
+        <MachineTypesMenu machine_type={machine_type} key={machine_type.id} />
       ))}
-     </ScrollView>
-    </SafeAreaView>
+    </Container>
   );
 };
 
